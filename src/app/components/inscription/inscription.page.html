@@ -1,0 +1,78 @@
+<ion-toolbar id="inscription-toolbar">
+  <ion-buttons slot="start">
+    <ion-icon style="color:#4B6F15;" size="large" id="button-back" name="arrow-back-outline" (click)="goToHome()"></ion-icon>
+  </ion-buttons>
+</ion-toolbar>
+
+<ion-content [fullscreen]="true" class="scroller" style="background-color: white; margin-bottom: 5%">
+  <div class="container">
+  <ion-img
+    src="../../../assets/Ambulib.png"
+    scale="0.5"
+    alt="Logo de l'entreprise Ambulib"
+  ></ion-img>
+    <ion-text><h2>Inscription</h2></ion-text>
+  </div>
+  <div id="form" style="margin-bottom: 5%">
+    <ion-item>
+      <ion-select [(ngModel)]="genre" name="genre" placeholder="Sélectionnez un genre (*)">
+        <ion-select-option value="M.">M.</ion-select-option>
+        <ion-select-option value="Mme">Mme</ion-select-option>
+        <ion-select-option value="Mlde">Mdle</ion-select-option>
+        <ion-select-option value="Autre">Autre</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nom <ion-text color="danger">(*)</ion-text></ion-label>
+      <ion-input [(ngModel)]="nom" name="nom"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Prénom <ion-text color="danger">(*)</ion-text> </ion-label>
+      <ion-input [(ngModel)]="prenom" name="prenom"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Email <ion-text color="danger">(*)</ion-text> </ion-label>
+      <ion-input [(ngModel)]="email" name="email" type="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Téléphone mobile <ion-text color="danger">(*)</ion-text> </ion-label>
+      <ion-input [(ngModel)]="login" name="login"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Mot de passe <ion-text color="danger">(*)</ion-text> </ion-label>
+      <ion-input [(ngModel)]="password" name="password" type="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Date de naissance" labelPlacement="stacked" type="date" [(ngModel)]="datenaissance" name="datenaissance"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Adresse <ion-text color="danger">(*)</ion-text> </ion-label>
+      <ion-input labelPlacement="stacked" [(ngModel)]="adresse" name="adresse"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Code postal <ion-text color="danger">(*)</ion-text> </ion-label>
+      <ion-input [(ngModel)]="codepostal" name="codepostal" labelPlacement="stacked"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Ville <ion-text color="danger">(*)</ion-text> </ion-label>
+      <ion-input [(ngModel)]="ville" name="ville"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Pays <ion-text color="danger">(*)</ion-text> </ion-label>
+      <ion-input [(ngModel)]="pays" name="pays"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-select label="Profil (*)" labelPlacement="stacked" [(ngModel)]="profilSelected" placeholder="Choisir dans la liste">
+        <ion-select-option *ngFor="let profil of profils" [value]="profil.id">
+          {{ profil.nom }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="profilSelected === 2" style="margin-bottom: 5%">
+      <ion-textarea [(ngModel)]="antecedents" name="antecedents" label="Antécédents à savoir" labelPlacement="floating" placeholder="Entrer votre texte"></ion-textarea>
+    </ion-item>
+    <ion-text color="danger" style="font-size: small;">(*) : Les champs avec ce symbole sont à remplir obligatoirement</ion-text>
+  </div>
+  <ion-button (click)="postUtilisateur()" id="button_inscription" style="--background:#4B6F15; margin-bottom:10%" id="button_connexion" expand="block">S'inscrire</ion-button>
+</ion-content>
+

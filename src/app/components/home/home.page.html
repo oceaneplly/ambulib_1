@@ -9,7 +9,7 @@
     <div id="form">
     <ion-item>
       <ion-label position="floating">Téléphone</ion-label>
-      <ion-input [(ngModel)]="login"></ion-input>
+      <ion-input type="tel" [(ngModel)]="login"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Mot de passe</ion-label>
@@ -17,7 +17,7 @@
     </ion-item>
     </div>
     <ion-button style="--background:#4B6F15" (click)="connexion()" id="button_connexion" expand="block">Connexion</ion-button>
-    <ion-text style="color:#4B6F15">
+    <ion-text style="color:#4B6F15; text-decoration: underline;" (click)="redirectToInscription()">
       Pas encore inscrit ?
     </ion-text>
   </div>

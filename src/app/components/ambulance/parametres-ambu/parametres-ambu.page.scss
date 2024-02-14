@@ -1,0 +1,135 @@
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+
+ion-img {
+  border-radius: 15px;
+  background-size: cover;
+  margin-top: 0%;
+  max-width: 30% !important;
+  max-height: 30% !important;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+h2 {
+  margin-top: 0%;
+  text-align: center !important;
+}
+
+ion-content {
+  --offset-bottom: auto !important;
+  --overflow: auto;
+  --background: white;
+  overflow: auto;
+
+  &::part(background) {
+    bottom: 0;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+    scrollbar-width: none;
+  }
+}
+
+ion-text {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#form {
+  margin: 3%;
+}
+
+#reservation-toolbar {
+  height: 5%
+}
+
+ion-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2%;
+}
+
+ion-card-title {
+  font-size: 150%;
+  text-align: center;
+}
+
+ion-card-content {
+  text-align: center;
+
+}
+
+ion-item-icon {
+  margin-right: 2%;
+}
+
+ion-text {
+  font-size: 80%;
+}
+
+ion-card-content {
+  padding-bottom: 4%;
+  font-size: small;
+}
+
+ion-card-header {
+  padding: 3%;
+}
+
+#form {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+ion-icon {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+ion-card-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+

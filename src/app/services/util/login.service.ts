@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { ConfigurationService } from './configuration.service';
-import { EncryptionService } from '../../services/util/encryption.service';
-import * as Parameters from '../../../assets/configuration/parameters';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -17,31 +14,41 @@ export class LoginService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private encryptionService: EncryptionService,
-    private config: ConfigurationService
   ) {
-    this.URL_LOGIN = this.config.URL_LOGIN;
+    this.URL_LOGIN = "https://ambulib.tech/API/public/login"
   }
 
   connect(login: string, pwd: string) {
-    login = login.toLowerCase(); // pour pouvoir se connecter avec l'IPN en majuscules
+    login = login.toLowerCase();
     return this.http.post(this.URL_LOGIN, { login, pwd });
+  }
+
+  logout() {
+    localStorage.clear();
+    // emission de l'event de deconnection
+    this.sendConnexionEvent(null);
+    this.router.navigate(['home']);
+  }
+
+  sendConnexionEvent(user: unknown) {
+    this.connectionEvents.next(user);
   }
 
   isLog() {
     let returnRes = false;
     const token = localStorage.getItem('token');
-    const userInfo = localStorage.getItem('_i');
+    const userInfo = localStorage.getItem('user');
     if (token) {
       // Si on a un token, on verifie s'il est encore valide (<24heures)
-      const timeToken = parseInt(this.encryptionService.decrypt(localStorage.getItem('_t')), 10);
+     // @ts-ignore
+      const timeToken = parseInt(localStorage.getItem('time'));
       if (isNaN(timeToken)) {
         returnRes = false;
       } else {
         const now = Math.floor(Date.now() / 1000);
         const timeDiff = Math.abs(now - timeToken);
         const diffHours = Math.ceil(timeDiff / (3600));
-        if (diffHours < Parameters.sessionTimeout) {
+        if (diffHours < 1706101753) {
           returnRes = true;
         }
       }
@@ -49,21 +56,10 @@ export class LoginService {
     if (!userInfo) {
       returnRes = false;
     }
-    if (returnRes === false) {
-      localStorage.clear();
-    }
+  //  if (returnRes === false) {
+  //    localStorage.clear();
+  //  }
     return returnRes;
-  }
-
-  logout() {
-    localStorage.clear();
-    // emission de l'event de deconnection
-    this.sendConnexionEvent(null);
-    this.router.navigate(['login']);
-  }
-
-  sendConnexionEvent(user) {
-    this.connectionEvents.next(user);
   }
 
   getConnectionEvents() {

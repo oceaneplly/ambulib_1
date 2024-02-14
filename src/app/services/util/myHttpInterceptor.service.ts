@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpResponse, HttpErrorResponse, HttpHandler, HttpEvent, HttpEventType } from '@angular/common/http';
 import { LoadingService } from './loading.service';
-import { AlertifyService } from './alertify.service';
-import { ConfigurationService } from './configuration.service';
+
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -11,13 +10,10 @@ import { Router } from '@angular/router';
 export class MyHttpInterceptor implements HttpInterceptor {
 
   // variables generales
-  private locale;
 
   // constructeur
   constructor(
     private router: Router,
-    private config: ConfigurationService,
-    private alertifyService: AlertifyService,
     private loadingService: LoadingService) {
   }
 
@@ -39,6 +35,7 @@ export class MyHttpInterceptor implements HttpInterceptor {
             break;
 
           case HttpEventType.UploadProgress:
+            // @ts-ignore
             const percentUploaded = Math.round(100 * evt.loaded / evt.total);
             // console.log(`Upload in progress! ${percentUploaded}% uploaded`);
             break;
@@ -48,6 +45,7 @@ export class MyHttpInterceptor implements HttpInterceptor {
             break;
 
           case HttpEventType.DownloadProgress:
+            // @ts-ignore
             const percentDownloaded = Math.round(evt.loaded / evt.total);
             // console.log(`Download in progress! ${percentDownloaded}% downloaded`);
             break;
@@ -75,20 +73,6 @@ export class MyHttpInterceptor implements HttpInterceptor {
 
         if (errResponse.error.level) {
           level = errResponse.error.level;
-        }
-
-        switch (level) {
-          case 'Info':
-            this.alertifyService.message(errorMsg);
-            break;
-
-          case 'Warning':
-            this.alertifyService.warning(errorMsg);
-            break;
-
-          default:
-            this.alertifyService.error(errorMsg);
-            break;
         }
 
         if (errResponse instanceof HttpErrorResponse) {

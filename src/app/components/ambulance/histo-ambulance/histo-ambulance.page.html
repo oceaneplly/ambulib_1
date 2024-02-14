@@ -1,0 +1,99 @@
+<ion-toolbar id="reservation-toolbar">
+</ion-toolbar>
+
+
+<ion-content [fullscreen]="true" class="scroller" style="background-color: white; margin-bottom: 5%">
+  <div class="container">
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <div id="form">
+      <ion-img
+        src="../../../assets/Ambulib.png"
+        scale="0.5"
+        alt="Logo de l'entreprise Ambulib"
+      ></ion-img>
+      <ion-text><h2>Historique</h2></ion-text>
+
+      <ion-list *ngIf="reservations !== undefined">
+        <ion-card *ngFor="let reservation of reservations"  (click)="showModal(reservation)">
+          <ion-card-header style="padding: 5%">
+            <ion-text class="title-reservation" style="font-size: 90%; color:#4B6F15; font-weight: bold;">{{ reservation.etablissement.nom }}</ion-text>
+          </ion-card-header>
+          <ion-card-content style="padding-bottom: 2%">
+            <div style="display: flex; flex-direction: column; color: grey;">
+              <ion-text style=" color: grey; display: flex; align-items: center; justify-content: flex-start;">
+                <ion-icon *ngIf="reservation.etat === 'Payée' || reservation.etat === 'En attente de paiement'" name="card-outline"></ion-icon>
+                <ion-icon *ngIf="reservation.etat === 'En attente'" name="alert-outline"></ion-icon>
+                <ion-icon *ngIf="reservation.etat === 'Refusée'" name="close"></ion-icon>
+                {{ reservation.etat }}
+              </ion-text>
+              <ion-text style="margin-top: 2%; color: grey; display: flex; align-items: center; justify-content: flex-start;">
+                <ion-icon name="calendar-outline"></ion-icon>
+                {{ reservation.date_rdv |  date: 'dd/MM/yyyy' }}
+              </ion-text>
+              <ion-text style="margin-top: 2%; margin-bottom: 5%; color: grey; display: flex; align-items: center; justify-content: flex-start;">
+                <ion-icon name="person-outline"></ion-icon>
+                {{ reservation.utilisateur.nom }} {{ reservation.utilisateur.prenom }}
+              </ion-text>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-list>
+      <ion-card *ngIf="reservations === undefined">
+        <ion-card-header style="padding: 3%">
+          <ion-text class="title-reservation" style="font-size: 90%; color:#4B6F15; font-weight: bold;">Aucune réservation</ion-text>
+        </ion-card-header>
+        <ion-card-content style="padding-bottom: 2%">
+          <ion-text style="color: grey; display: flex; align-items: center; justify-content: flex-start;">
+            Il n'y a pas de réservation dans l'historique pour le moment
+          </ion-text>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  <ion-modal [isOpen]="modal" trigger="open-modal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Fermer</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <div class="container">
+          <ion-img
+            src="../../../assets/Ambulib.png"
+            scale="0.5"
+            alt="Logo de l'entreprise Ambulib"
+          ></ion-img>
+          <ion-text>
+            <h2>{{ reservationDetails.etablissement.nom }}</h2>
+          </ion-text>
+          <ion-item>
+            <ion-input label="Personne" style="opacity: 1;"  labelPlacement="stacked" disabled="true" [(ngModel)]="reservationDetails.identite"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Date du rendez-vous" style="opacity: 1;"  labelPlacement="stacked"  type="date" disabled="true" [(ngModel)]="reservationDetails.date_rdv.split('T')[0]"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Heure du rendez-vous" style="opacity: 1;"  labelPlacement="stacked"  disabled="true" [(ngModel)]="timeReservation"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Type de séjour" style="opacity: 1;" labelPlacement="stacked" disabled="true" [(ngModel)]="reservationDetails.type_sejour"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Société concerné" style="opacity: 1;" labelPlacement="stacked" disabled="true" [(ngModel)]="reservationDetails.societe.nom"></ion-input>
+          </ion-item>
+          <ion-item style="margin-bottom: 5%">
+            <ion-textarea label="Autre" style="opacity: 1;"  labelPlacement="floating" placeholder="Entrer votre texte" disabled="true" [(ngModel)]="reservationDetails.autres"></ion-textarea>
+          </ion-item>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+
+
