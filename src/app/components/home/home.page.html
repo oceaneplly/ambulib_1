@@ -1,0 +1,24 @@
+
+<ion-content>
+  <ion-img
+    src="../../../assets/Ambulib.png"
+    scale="0.5"
+    alt="Logo de l'entreprise Ambulib"
+  ></ion-img>
+  <div id="container">
+    <div id="form">
+    <ion-item>
+      <ion-label position="floating">Téléphone</ion-label>
+      <ion-input [(ngModel)]="login"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Mot de passe</ion-label>
+      <ion-input  type="password" value="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+    </div>
+    <ion-button style="--background:#4B6F15" (click)="connexion()" id="button_connexion" expand="block">Connexion</ion-button>
+    <ion-text style="color:#4B6F15">
+      Pas encore inscrit ?
+    </ion-text>
+  </div>
+</ion-content>
