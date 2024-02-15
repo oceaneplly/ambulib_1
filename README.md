@@ -49,7 +49,5 @@ Si vous souhaitez contribuer à l'application Ionic, veuillez suivre les étapes
 - Créez une nouvelle branche pour vos modifications.
 - Apportez les modifications et les commit.
 - Poussez les modifications vers votre dépôt forké.
-- Créez une demande de tirage.
-
 
 
