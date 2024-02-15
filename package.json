@@ -1,7 +1,7 @@
 {
-  "name": "ionicAmbulib",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
+  "name": "Ambulib",
+  "version": "1.0.0",
+  "author": "Océane Pouilly",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
