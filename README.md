@@ -17,9 +17,9 @@ Pour configurer l'application Ionic, suivez les étapes ci-dessous :
 2. Accédez au répertoire du projet :
 ```cd <nom du projet>```
 3. Installez les dépendances :
-```npm install```
+```npm install``` 
 4. Démarrez l'application :
-```ionic serve```
+```ionic serve``` / ```ionic lab```
 
 Cela démarrera l'application dans le navigateur. Vous pouvez également utiliser la commande suivante pour exécuter l'application sur un appareil ou un émulateur :
 ```ionic cordova run <plateforme>```
